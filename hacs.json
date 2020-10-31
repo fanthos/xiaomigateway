@@ -5,6 +5,7 @@
 		"light",
 		"media_player"
 	],
+	"description": "Component for Xiaomi Gateway with 2ch relay(and others)",
 	"render_readme": true,
 	"homeassistant": "0.99.9"
 }
