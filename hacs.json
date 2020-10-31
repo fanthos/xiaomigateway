@@ -1,0 +1,10 @@
+{
+	"name": "Xiaomi Gateway MIIO",
+	"domains": [
+		"switch",
+		"light",
+		"media_player"
+	],
+	"render_readme": true,
+	"homeassistant": "0.99.9"
+}

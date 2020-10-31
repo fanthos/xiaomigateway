@@ -58,7 +58,7 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
         devices.append(w_sensor)
         devices.append(XiaomiGatewaySwitch(hass.data[DOMAIN]['power'][sid],device, f"{name}_l1", sid, 'channel_0', w_sensor))
         devices.append(XiaomiGatewaySwitch(hass.data[DOMAIN]['power'][sid],device, f"{name}_l2", sid, 'channel_1', w_sensor))
-        devices.append(XiaomiGatewayLight(device, name, sid))
+        # devices.append(XiaomiGatewayLight(device, name, sid))
         i = i + 1
     if len(devices) > 0:
         async_add_devices(devices, update_before_add=True)
@@ -139,7 +139,7 @@ class XiaomiGatewaySwitch(SwitchDevice):
         """Turn the switch on."""
         result = await self._try_command(
             self._device.send,
-            'toggle_ctrl_neutral', [self._channel,'on'],self._sid)
+            'toggle_ctrl_neutral', [self._channel,'on'], extra_parameters={'sid':self._sid})
         if result[0] == "ok":
             self._state = True
             self.async_schedule_update_ha_state()
@@ -150,8 +150,8 @@ class XiaomiGatewaySwitch(SwitchDevice):
             toggle = self._state
             result = await self._try_command(
                 self._device.send,
-                'toggle_ctrl_neutral', [self._channel,'toggle'],self._sid)
-            if result[0] == "ok"
+                'toggle_ctrl_neutral', [self._channel,'toggle'], extra_parameters={'sid':self._sid})
+            if result[0] == "ok":
                 if toggle:
                     self._state = False
                 else:
@@ -162,7 +162,7 @@ class XiaomiGatewaySwitch(SwitchDevice):
         """Turn the switch off."""
         result = await self._try_command(
             self._device.send,
-            'toggle_ctrl_neutral', [self._channel,'off'],self._sid)
+            'toggle_ctrl_neutral', [self._channel,'off'], extra_parameters={'sid':self._sid})
         if result[0] == "ok":
             self._state = False
             self.async_schedule_update_ha_state()

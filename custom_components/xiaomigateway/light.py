@@ -114,7 +114,7 @@ class XiaomiGatewayLight(Light):
         if self._state == False:
             result = await self._try_command(
                 self._device.send,
-                'set_power', ['on'],self._sid)
+                'set_power', ['on'], extra_parameters={'sid':self._sid})
             if result[0] == "ok":
                 self._state = True
 
@@ -124,7 +124,7 @@ class XiaomiGatewayLight(Light):
             _LOGGER.debug("CCT %d",cct)
             result = await self._try_command(
                 self._device.send,
-                'set_ct', [cct],self._sid)
+                'set_ct', [cct], extra_parameters={'sid':self._sid})
             if result[0] == "ok":
                 self._color_temp = color_temp
                 self._state = True
@@ -134,12 +134,12 @@ class XiaomiGatewayLight(Light):
             brightness = ceil((brightness * 100) / 255)
             result = await self._try_command(
                 self._device.send,
-                'set_bright', [brightness],self._sid)
+                'set_bright', [brightness], extra_parameters={'sid':self._sid})
             if result[0] == "ok":
                 brightness = 0
                 result = await self._try_command(
                     self._device.send,
-                    'get_bright', None ,self._sid)
+                    'get_bright', None, extra_parameters={'sid':self._sid})
                 if result[0] is not None:
                     brightness = result[0]
                     if brightness > 0 and brightness <= 100:
@@ -153,7 +153,7 @@ class XiaomiGatewayLight(Light):
         """Instruct the light to turn off."""
         result = await self._try_command(
             self._device.send,
-            'set_power', ['off'],self._sid)
+            'set_power', ['off'], extra_parameters={'sid':self._sid})
         if result[0] == "ok":
             self._state = False
         self.async_schedule_update_ha_state(True)
@@ -170,7 +170,7 @@ class XiaomiGatewayLight(Light):
         brightness = 0
         result = await self._try_command(
             self._device.send,
-            'get_bright', None ,self._sid)
+            'get_bright', None, extra_parameters={'sid':self._sid})
         if result[0] is not None:
             brightness = result[0]
             if brightness > 0 and brightness <= 100:
