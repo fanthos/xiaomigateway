@@ -10,7 +10,6 @@ import datetime
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_COLOR_TEMP,
-    ATTR_ENTITY_ID,
     SUPPORT_BRIGHTNESS,
     SUPPORT_COLOR_TEMP
 )
