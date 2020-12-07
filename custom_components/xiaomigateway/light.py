@@ -14,7 +14,7 @@ from homeassistant.components.light import (
     SUPPORT_COLOR_TEMP
 )
 from homeassistant.const import (CONF_HOST, CONF_NAME, CONF_TOKEN, STATE_OFF, STATE_ON)
-
+from homeassistant.helpers.entity import Entity
 try:
     from homeassistant.components.light import (LightEntity)
 except:
